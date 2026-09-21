@@ -1,0 +1,16 @@
+{
+  "schema": "elysium.factory.public.v1",
+  "updated_at": "2026-09-21T10:10:00+02:00",
+  "state": "AWAITING_PC_FEED",
+  "ram_available_gb": null,
+  "ram_used_pct": null,
+  "active": 0,
+  "ready": 0,
+  "inbox": 0,
+  "frontier": "PlaySessionHost -> ViewFrame -> Godot presentation consumer",
+  "components": {
+    "github_transport": "CONFIGURATION_PENDING",
+    "factory": "FEED_PENDING"
+  },
+  "results": []
+}
