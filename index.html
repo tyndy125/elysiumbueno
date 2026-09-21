@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elysium Factory Monitor</title>
+<style>
+body{margin:0;background:#07101f;color:#eef5ff;font-family:system-ui,-apple-system,sans-serif}main{max-width:900px;margin:auto;padding:24px}.head{display:flex;justify-content:space-between;align-items:center}.badge{padding:7px 12px;border-radius:999px;background:#26354a}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}.card{background:#101c31;border:1px solid #253652;border-radius:15px;padding:18px}.big{font-size:32px;font-weight:750;margin:8px 0}.muted{color:#9db0c9}.ok{color:#5ce6a5}.warn{color:#ffd36a}.bad{color:#ff7184}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:10px;border-bottom:1px solid #263750}code{word-break:break-all}@media(max-width:600px){main{padding:16px}.big{font-size:27px}}
+</style>
+</head>
+<body><main>
+<div class="head"><div><h1>ELYSIUM FACTORY</h1><div class="muted">Monitor público sanitizado · solo lectura</div></div><div id="state" class="badge">LOADING</div></div>
+<div class="grid">
+<div class="card"><div class="muted">RAM disponible</div><div id="ram" class="big">—</div><div id="ram2" class="muted">—</div></div>
+<div class="card"><div class="muted">Trabajo activo</div><div id="active" class="big">—</div><div id="queue" class="muted">—</div></div>
+<div class="card"><div class="muted">Último contacto</div><div id="age" class="big">—</div><div id="updated" class="muted">—</div></div>
+<div class="card"><div class="muted">Frontera</div><div id="frontier" style="margin-top:10px">—</div></div>
+</div>
+<div class="card"><h2>Componentes</h2><div id="components">Sin datos todavía.</div></div>
+<div class="card" style="margin-top:14px"><h2>Últimos resultados</h2><div id="results">Sin datos todavía.</div></div>
+<script>
+async function refresh(){
+ try{
+  const r=await fetch('factory-status.json?'+Date.now(),{cache:'no-store'}); if(!r.ok)throw Error();
+  const d=await r.json(), t=new Date(d.updated_at), age=Math.max(0,Math.floor((Date.now()-t)/1000));
+  state.textContent=d.state||'UNKNOWN'; ram.textContent=d.ram_available_gb==null?'—':d.ram_available_gb+' GB';
+  ram2.textContent=d.ram_used_pct==null?'—':d.ram_used_pct+'% usada';
+  active.textContent=d.active??0; queue.textContent='Ready '+(d.ready??0)+' · Inbox '+(d.inbox??0);
+  age.textContent=age<60?age+' s':Math.floor(age/60)+' min'; updated.textContent=t.toLocaleString();
+  frontier.textContent=d.frontier||'—';
+  components.innerHTML=Object.entries(d.components||{}).map(([k,v])=>'<p><b>'+k+'</b>: '+v+'</p>').join('')||'Sin datos.';
+  results.innerHTML=(d.results||[]).map(x=>'<p><b>'+x.id+'</b> · '+x.status+'</p>').join('')||'Sin datos.';
+ }catch(e){state.textContent='NO DATA';state.className='badge bad'}
+}
+refresh();setInterval(refresh,30000);
+</script></main></body></html>
