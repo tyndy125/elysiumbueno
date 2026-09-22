@@ -22,10 +22,12 @@ async function refresh(){
  try{
   const r=await fetch('factory-status.json?'+Date.now(),{cache:'no-store'}); if(!r.ok)throw Error();
   const d=await r.json(), t=new Date(d.updated_at), age=Math.max(0,Math.floor((Date.now()-t)/1000));
-  state.textContent=d.state||'UNKNOWN'; ram.textContent=d.ram_available_gb==null?'—':d.ram_available_gb+' GB';
+  const stale=age>900;
+  state.textContent=stale?'STALE · '+(d.state||'UNKNOWN'):(d.state||'UNKNOWN');
+  state.className='badge '+(stale?'bad':'ok'); ram.textContent=d.ram_available_gb==null?'—':d.ram_available_gb+' GB';
   ram2.textContent=d.ram_used_pct==null?'—':d.ram_used_pct+'% usada';
   active.textContent=d.active??0; queue.textContent='Ready '+(d.ready??0)+' · Inbox '+(d.inbox??0);
-  age.textContent=age<60?age+' s':Math.floor(age/60)+' min'; updated.textContent=t.toLocaleString();
+  age.textContent=age<60?age+' s':age<3600?Math.floor(age/60)+' min':Math.floor(age/3600)+' h'; updated.textContent=t.toLocaleString()+(stale?' · TELEMETRÍA DESACTUALIZADA':'');
   frontier.textContent=d.frontier||'—';
   components.innerHTML=Object.entries(d.components||{}).map(([k,v])=>'<p><b>'+k+'</b>: '+v+'</p>').join('')||'Sin datos.';
   results.innerHTML=(d.results||[]).map(x=>'<p><b>'+x.id+'</b> · '+x.status+'</p>').join('')||'Sin datos.';
