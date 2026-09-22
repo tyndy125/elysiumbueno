@@ -1,16 +1,27 @@
-{
-  "schema": "elysium.factory.public.v1",
-  "updated_at": "2026-09-21T10:10:00+02:00",
-  "state": "AWAITING_PC_FEED",
-  "ram_available_gb": null,
-  "ram_used_pct": null,
-  "active": 0,
-  "ready": 0,
-  "inbox": 0,
-  "frontier": "PlaySessionHost -> ViewFrame -> Godot presentation consumer",
-  "components": {
-    "github_transport": "CONFIGURATION_PENDING",
-    "factory": "FEED_PENDING"
-  },
-  "results": []
+﻿{
+    "schema":  "elysium.factory.public.v1",
+    "updated_at":  "2026-09-22T16:09:36.4490397+02:00",
+    "state":  "IDLE",
+    "ram_total_mb":  15724,
+    "ram_free_mb":  9457,
+    "ram_used_pct":  39.9,
+    "active":  0,
+    "ready":  0,
+    "inbox":  0,
+    "done":  1664,
+    "failed":  24,
+    "blocked":  0,
+    "needs_review":  0,
+    "coverage_minutes":  0,
+    "frontier":  "PlaySessionHost -\u003e ViewFrame -\u003e Godot presentation consumer",
+    "components":  {
+                       "scheduler":  "ONLINE",
+                       "local_refill":  "ONLINE",
+                       "memory_guard":  "ONLINE",
+                       "github_feed":  "ONLINE"
+                   },
+    "results":  [
+
+                ]
 }
+
