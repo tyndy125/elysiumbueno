@@ -1,10 +1,10 @@
 ﻿{
     "schema":  "elysium.factory.public.v1",
-    "updated_at":  "2026-10-01T13:55:51.6203196+02:00",
-    "state":  "DEGRADED",
+    "updated_at":  "2026-10-01T14:00:51.6154327+02:00",
+    "state":  "IDLE",
     "ram_total_mb":  32108,
-    "ram_free_mb":  24246,
-    "ram_used_pct":  24.5,
+    "ram_free_mb":  24116,
+    "ram_used_pct":  24.9,
     "active":  0,
     "ready":  0,
     "inbox":  0,
@@ -15,7 +15,7 @@
     "coverage_minutes":  0,
     "frontier":  "PlaySessionHost -\u003e ViewFrame -\u003e Godot presentation consumer",
     "components":  {
-                       "scheduler":  "MISSING",
+                       "scheduler":  "ONLINE",
                        "local_refill":  "ONLINE",
                        "memory_guard":  "ONLINE",
                        "github_feed":  "ONLINE"
