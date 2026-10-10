@@ -1,10 +1,10 @@
 ﻿{
     "schema":  "elysium.factory.public.v1",
-    "updated_at":  "2026-10-10T08:40:52.5120857+02:00",
+    "updated_at":  "2026-10-10T08:45:52.5268555+02:00",
     "state":  "IDLE",
     "ram_total_mb":  32108,
-    "ram_free_mb":  20653,
-    "ram_used_pct":  35.7,
+    "ram_free_mb":  20666,
+    "ram_used_pct":  35.6,
     "active":  0,
     "ready":  0,
     "inbox":  0,
